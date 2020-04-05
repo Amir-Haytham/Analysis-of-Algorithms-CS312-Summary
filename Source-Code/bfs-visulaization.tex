@@ -1,0 +1,116 @@
+\chapter{BFS Visualzation On Console}
+
+\section{Problem Description}
+There's an object has starting point S and ending point \#. This object finds the shortest path using BFS algorithms, as the graph expands in the same weight of edges, so BFS is enough and efficient for this problem
+\\
+\newline
+\textbf{{\Large{Implementation}}}
+
+\begin{lstlisting}{c++}
+        #include <bits/stdc++.h>
+        #define INF 1000'000'000
+        using namespace std;
+        struct cell{
+        	int x,y;
+        	cell(int x = 0, int y = 0):x(x), y(y){}
+        	bool operator== (cell RHS)const{
+        		return x == RHS.x && y == RHS.y;
+        	}
+        	bool operator != (cell RHS)const{
+        		return x!=RHS.x || y != RHS.y;
+        	}
+        };
+        
+        vector < string > grid;
+        int n, m;
+        
+        void set_src_sink(cell & src, cell & sink){
+        	for(int i = 0; i < n; i++)
+        		for(int j = 0; j < m; j++){
+        			if(grid[i][j] == 'S' || grid[i][j] == 's')
+        				src = {i,j};
+        			else if(grid[i][j] == 'E' || grid[i][j] == 'e')
+        				sink = {i,j};
+        		}
+        }
+        /// return shortest path_cost , path from src to sink
+        bool valid_cell(cell c){
+        	return c.x >= 0 && c.x < n && c.y >= 0 && c.y < m;
+        }
+        pair<int , vector < cell > > solve_maze_bfs(cell src, cell sink){
+        	queue < cell > q;/// bfs queue	
+        	vector < vector < bool > > vis(n+1, vector < bool > (m+1));
+        	vector < vector < cell > > prev(n+1, vector < cell > (m+1, cell(-1,-1)));
+        	q.push(src), vis[src.x][src.y] = true;
+        	int dx[] = {0, 0, 1, -1};
+        	int dy[] = {1, -1, 0, 0};
+        	int sh_path = INF;
+        	for(int sz = q.size(), level = 0; !q.empty(); sz = q.size(), level++){
+        		while(sz--){
+        			cell v = q.front(); q.pop();
+        			if(v == sink){
+        				sh_path = level;
+        				break;
+        			}
+        			for(int i = 0; i < 4; i++){//4 directions
+        				cell u(v.x + dx[i], v.y + dy[i]);
+        				if(valid_cell(u) && !vis[u.x][u.y] && grid[u.x][u.y] != '#'){
+        					vis[u.x][u.y] = true, q.push(u), prev[u.x][u.y] = v;
+        				}
+        			}
+        		}
+        	}
+        	vector < cell > path;
+        	if(sh_path == INF)/// no answer to given maze
+        		return {INF, path};
+        	/// here there are path retrieve it!
+        	while(sink != cell(-1,-1)){
+        		path.push_back(sink), sink = prev[sink.x][sink.y];
+        	}
+        	reverse(path.begin(), path.end());
+        	return {sh_path, path};
+        }
+        void input_grid(){
+        	cin >> n >> m;
+        	grid = vector <string> (n);
+        	for(auto &row : grid)
+        		cin >> row;
+        }
+        
+        void print_grid(vector <string> grd){
+        	for(auto str : grd)
+        		cout << str << endl;
+        }
+        
+        int main(){
+        	ios_base::sync_with_stdio(false);
+        	cin.tie(NULL);
+        	///freopen("input.in", "r", stdin);
+        	input_grid();
+        	/// Find Starting Point and end Point
+        	cell src, sink;
+        	set_src_sink(src, sink);
+        	pair<int, vector < cell> > ret = solve_maze_bfs(src, sink);
+        	int shortest_path = ret.first;
+        	auto path = ret.second;
+        	/// print path
+        	if(shortest_path == INF){/// can't find path
+        		cout << "No Solution !!!!!!" << endl;
+        		return 0;
+        	}
+        	auto cpy = grid;
+        	for(cell c : path){	
+        		cpy[c.x][c.y] = 'U';
+        		print_grid(cpy);
+        		std::this_thread::sleep_for (std::chrono::seconds(1));
+           		system("clear");
+        		cpy[c.x][c.y] = grid[c.x][c.y];
+        	}
+        	cout << "Shortest_path:" << shortest_path << endl;
+        	for(cell c : path)
+        		cout << c.x << " " << c.y << endl;
+        	
+        }
+\end{lstlisting}
+
+And you can try this code on Desktop Compiler -prefered- not the Online one to see how the object investigate the maze to find shorest path. Check This \href{https://ideone.com/QPASLt?fbclid=IwAR11HdoKLp3ELsjZK5voKQazZ5bE7dcnNdqi1oc99vqRwYN3DZ1wU-bCdzY}{\color{blue}{\textbf {Link}}}  for the code and valid test case just check stdin section and copy and paste it in your compiler  

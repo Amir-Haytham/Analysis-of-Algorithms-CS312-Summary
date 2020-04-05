@@ -1,0 +1,191 @@
+\documentclass[12pt, a4paper]{book}%, oneside
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\usepackage[headings]{fullpage}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+
+%setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{lipsum}
+\usepackage{enumitem}
+\usepackage{array}
+% \usepackage{xtab}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{appendix}
+\usepackage[pdfborder={0 0 0}, colorlinks=true, linkcolor=black, citecolor=blue]{hyperref}
+\usepackage[printonlyused]{acronym}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{ifpdf}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{array}
+% \usepackage{xtab}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{appendix}
+\usepackage[pdfborder={0 00},colorlinks=true,linkcolor=black,citecolor=blue]
+
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage[table]{xcolor}
+\usepackage{tikz,calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+% \setlength{\parindent}{0pt}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{minted}
+
+\parindent=0pt
+\definecolor{RoyalBlue}{cmyk}{1, 0.50, 0, 0}
+
+\lstset{language=C++,
+    keywordstyle=\color{RoyalBlue},
+    basicstyle=\ttfamily\bfseries\scriptsize\ttfamily,
+    commentstyle=\texttt\texttt\color{gray},
+    stringstyle=\bfseries\bfseries\ttfamily,	
+    showstringspaces=false,
+    breaklines=true,
+    frameround=ffff,
+    frame=single,
+    rulecolor=\color{black},
+    xleftmargin=\dimexpr\fboxsep-\fboxrule,
+    xrightmargin=\dimexpr\fboxsep-\fboxrule,
+    gobble=8
+}
+
+\newcommand{\submissionDay}{15}
+\newcommand{\submissionMonth}{December}
+
+\newcommand{\submissionYear}{2019}
+\newcommand{\submissionDate}{\submissionDay~\submissionMonth~\submissionYear}
+\newcommand{\typeOfThesis}{Semester Project}
+
+\newcommand{\titleOfThesisOne}{Semester Project and Explanation of Source Codes related to some problems}
+
+\newcommand{\authorOfThesis}{Amir Haytham Salama}
+\newcommand{\supervisorOne}{Prof. Dr. Ahmad Fouad}
+
+\newcommand{\includefig}[4]{
+    \begin{figure}[ht]
+     \centering
+      \includegraphics[width=#1\textwidth]{images/#2}
+      \caption{#3}
+      \label{#4}
+    \end{figure}
+}
+
+\newcommand{\includefigWSC}[5]{
+    \begin{figure}[ht]
+     \centering
+      \includegraphics[width=#1\textwidth]{images/#2}
+      \caption[#3]{#4}
+      \label{#5}
+    \end{figure}
+}
+
+\newcommand{\includeeps}[4]{
+\includefig{#1}{#2.eps}{#3}{#4}
+}
+
+\newcommand{\includeepsWSC}[5]{
+\includefigWSC{#1}{#2.eps}{#3}{#4}{#5}
+}
+
+
+\ifpdf
+\pdfinfo {
+	/Author (\authorOfThesis)
+	/Title (\titleOfThesisOne)
+	/Subject (\typeOfThesis)
+	/Keywords ()
+	/CreationDate (D:20090707085533)
+}
+\fi
+
+\begin{document}
+% \overfullrule=5pt
+\pagestyle{plain}
+\pagenumbering{Roman}
+
+\include{TitlePage}
+
+\include{acknowledgments}
+
+\include{abstract}
+\addcontentsline{toc}{chapter}{Contents}
+\tableofcontents
+
+\clearpage 
+
+\pagestyle{headings}
+\pagenumbering{arabic}
+
+% \setlength\parskip{15pt}
+\setlength\parskip{.5\baselineskip plus .2\baselineskip
+	minus .4\baselineskip}
+% \setlength\parskip{.5\baselineskip \@plus .1\baselineskip \@minus ..1\baselineskip}
+
+
+\include{sorting-algorithms}
+\include{Graph}
+\include{problem-solving-paradigms}
+\include{bfs-visulaization}
+
+% add more chapters here
+
+\include{appendix}
+
+\bibliographystyle{plain}
+\bibliography{bachelor}
+\addcontentsline{toc}{chapter}{References}
+
+\end{document}
+
+\newpage
+
+
+
+
+
+
+{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
