@@ -34,9 +34,11 @@
 \end{figure}
 
 Abridged problem statement: In chess (with an $8$ × $8$ board), it is possible to place eight queens on the board such that no two queens attack each other. Determine all such possible arrangements given the position of one of the queens (i.e. coordinate ($a$, $b$) must contain a queen). Output the possibilities in $lexicographical$ (sorted) order.
+\\
 
 \hspace{7mm}The most naive solution is to enumerate all combinations of 8 different cells out of the
 8 × 8 = 64 possible cells in a chess board and see if the 8 queens can be placed at these positions without conflicts. However, there are $_6_4C_8$ $\approx$ $4B$ such possibilities—this idea is not even worth trying.
+\\
  
 \hspace{7mm}A better but still naive solution is to realize that each queen can only occupy one column, so we can put exactly one queen in each column. There are only $8^8$ $\approx$ $17M$ possibilities now,
 down from $4B$. This is still a ‘borderline’-passing solution for this problem. If we write a Complete Search like this, we are likely to receive the Time Limit Exceeded (TLE) verdict especially if there are multiple test cases. We can still apply the few more easy optimizations described below to further reduce the search space.
@@ -46,10 +48,13 @@ same row. Using this, we can further simplify the original problem
 to the problem of finding valid permutations of 8! row positions.
 The value of \lstinline|row[i]| describes the row position of the queen in
 column i. Example: \lstinline|row = {1, 3, 5, 7, 2, 0, 6, 4}| as in Figure\ref{fig:8-queen-problem} is one of the solutions for this problem;  \lstinline|row[0] = 1| implies that the queen in column 0 is placed in row 1, and so on (the index starts from 0 in this example). Modeled this way, the search space goes down from $8^8$ $\approx$ $17M$ to $8!$ $\approx$ $40K$  This solution is already fast enough, but we can still do more.
+\\
 
 \hspace{7mm}We also know that no two queens can share any of the two diagonal lines. Let queen A be at \lstinline|(i, j)| and queen B be at \lstinline|(k, l)|. They attack each other if \lstinline|abs(i-k) == abs(j-l)|. This formula means that the vertical and horizontal distances between these two queens are equal, i.e. queen A and B lie on one of each other’s two diagonal lines.
+\\
 
 \hspace{7mm}A recursive backtracking solution places the queens one by one in columns 0 to 7, observing all the constraints above. Finally, if a candidate solution is found, check if at least one of the queens satisfies the input constraints, i.e. \lstinline|row[b] == a|. This sub (i.e. lower than) $O(n!)$ solution will obtain an AC verdict.
+\\
 
 \begin{lstlisting}{c++}
         /* 8 Queens Chess Problem */

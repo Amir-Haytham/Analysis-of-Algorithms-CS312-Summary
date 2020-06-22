@@ -2,10 +2,13 @@
 
 \section{Overview and Motivation} 
 \label{sec:s1}
-   The graph is a pervasive structure which appears in many Computer Science problems. A graph (G = (V,E)) in its basic form is simply a set of vertices (V) and edges (E; storing connectivity information between vertices in V). Later in the next section, we will explore many important graph problems and algorithms. To prepare ourselves, we will discuss three basic ways (there are a few other rare structures) to represent a graph G with V vertices and E edges in this subsection20. Many real-life problems can be classified as graph problems. Some have efficient solutions. Some do not have them yet.   
+   \hspace{7mm}The graph is a pervasive structure which appears in many Computer Science problems. A graph $(G = (V,E))$ in its basic form is simply a set of vertices $(V)$ and edges (E; storing connectivity information between vertices in V). Later in the next section, we will explore many important graph problems and algorithms. To prepare ourselves, we will discuss three basic ways (there are a few other rare structures) to represent a graph $G$ with $V$ vertices and $E$ edges in this subsection. Many real-life problems can be classified as graph problems. Some have efficient solutions. Some do not have them yet.   
    \\
    
-   In this relatively chapter, we discuss graph problems that commonly appear in real life, the algorithms to solve them, and the practical implementations of these algorithms. We cover topics ranging from basic graph traversals, minimum spanning trees, single-source/all-pairs shortest paths, and discuss graphs with special properties. In computer science, a graph is an abstract data type that is meant to implement the undirected graph and directed graph concepts from mathematics; specifically, the field of graph theory. A graph data structure consists of a finite (and possibly mutable) set of vertices (also called nodes or points), together with a set of unordered pairs of these vertices for an undirected graph or a set of ordered pairs for a directed graph. These pairs are known as edges (also called links or lines), and for a directed graph are also known as arrows. The vertices may be part of the graph structure, or may be external entities represented by integer indices or references. A graph data structure may also associate to each edge some edge value, such as a symbolic label or a numeric attribute (cost, capacity, length, etc.)in figure \ref{fig:GraphRepresentation}.
+   \hspace{7mm}In this relatively chapter, we discuss graph problems that commonly appear in real life, the algorithms to solve them, and the practical implementations of these algorithms. We cover topics ranging from basic graph traversals, minimum spanning trees, single-source/all-pairs shortest paths, and discuss graphs with special properties. In computer science, a graph is an abstract data type that is meant to implement the undirected graph and directed graph concepts from mathematics; specifically, the field of graph theory.    
+   \\
+   
+   \hspace{7mm}A graph data structure consists of a finite (and possibly mutable) set of vertices (also called nodes or points), together with a set of unordered pairs of these vertices for an undirected graph or a set of ordered pairs for a directed graph. These pairs are known as edges (also called links or lines), and for a directed graph are also known as arrows. The vertices may be part of the graph structure, or may be external entities represented by integer indices or references. A graph data structure may also associate to each edge some edge value, such as a symbolic label or a numeric attribute (cost, capacity, length, etc.) In figure \ref{fig:GraphRepresentation}.
 \newpage
 
 \\
@@ -44,7 +47,7 @@ Using DFS (Depth first search) and BFS (Breadth first search).
 \item Finding Minimum Spanning Tree. Using Kruskal’s Algorithm and Prim’s Algorithm.
 \item Finding Shortest Path Algorithms included Single-Source Shortest Paths:
 
-SSSP on Unweighted Graph, SSSP on Weighted Graph and SSSP on Graph with Negative Weight Cycle and All-Pairs Shortest Paths -Explanation of Floyd Warshall’s DP Solution. 
+$SSSP$ on Unweighted Graph, $SSSP$ on Weighted Graph and $SSSP$ on Graph with Negative Weight Cycle and All-Pairs Shortest Paths -Explanation of Floyd Warshall’s DP Solution. 
 \item Finding maximum flow using Edmonds Karp’s algorithm and Hopcroft Karp’s algorithm.
 \end{itemize}
 
@@ -52,7 +55,7 @@ SSSP on Unweighted Graph, SSSP on Weighted Graph and SSSP on Graph with Negative
 \section{Graph Traversel}
 This section discusses two fundamental graph algorithms: depth-first search and breadth-first search. Both algorithms are given a starting node in the graph, and they visit all nodes that can be reached from the starting node. The difference in the algorithms is the order in which they visit the nodes.
 \subsection{Depth First Search (DFS) }\label{subsection:DFS}
-Depth First Search is one of the main graph algorithms. Depth First Search finds the lexicographical first path in the graph from a source vertex u to each vertex. Depth First Search will also find the shortest paths in a tree (because there only exists one simple path), but on general graphs this is not the case. The algorithm works in O(m+n) time where n is the number of vertices and m is the number of edges.
+Depth First Search is one of the main graph algorithms. Depth First Search finds the lexicographical first path in the graph from a source vertex u to each vertex. Depth First Search will also find the shortest paths in a tree (because there only exists one simple path), but on general graphs this is not the case. The algorithm works in $O(m+n)$ time where n is the number of vertices and m is the number of edges.
 
 \subsubsection{Example}\ref{subsection:DFS}
 Let us consider how depth-first search processes the following graph:
@@ -138,7 +141,7 @@ It is the same as the previous functon, but changing just two lines to of this c
 
 
 
-But for an awesome small words of codes. We can get some help from benefits of c++14, to change the syntax to be a bit samller than before:
+But for an awesome small words of codes. We can get some help from benefits of C$++14$, to change the syntax to be a bit smaller than before:
 \begin{lstlisting}{c++}
         void dfs(int s) {
                 if (visited[s]) return; //important check to avoid cycle and if the current node was visited BACKTRACK 
@@ -166,12 +169,13 @@ But also, it is the same as the previous functon, but changing just two lines to
 \newpage 
 
 \subsection{Breadth First Search (BFS)}\label{subsec:BFS}
-Breadth-first search (BFS) is one of the basic and essential searching algorithms on graphs. BFS visits the nodes in increasing order of their distance from the starting node. Thus, we can calculate the distance from the starting node to all other nodes using breadth-first search. Breadth-first search goes through the nodes one level after another. First the search explores the nodes whose distance from the starting node is 1, then the nodes whose distance is 2, and so on. This process continues until all nodes have been visited.\\
-More precisely, the algorithm can be stated as follows: Create a queue q which will contain the vertices to be processed and a Boolean array used[] which indicates for each vertex, if it has been lit (or visited) or not.
+\hspace{7mm}Breadth-first search (BFS) is one of the basic and essential searching algorithms on graphs. BFS visits the nodes in increasing order of their distance from the starting node. Thus, we can calculate the distance from the starting node to all other nodes using breadth-first search. Breadth-first search goes through the nodes one level after another. First the search explores the nodes whose distance from the starting node is 1, then the nodes whose distance is 2, and so on. This process continues until all nodes have been visited.
 
-Initially, push the source s to the queue and set used[s]=true, and for all other vertices v set used[v]=false. Then, loop until the queue is empty and in each iteration, pop a vertex from the front of the queue. Iterate through all the edges going out of this vertex and if some of these edges go to vertices that are not already lit, set them on fire and place them in the queue.
+\hspace{7mm}More precisely, the algorithm can be stated as follows: Create a queue q which will contain the vertices to be processed and a Boolean array used[ ] which indicates for each vertex, if it has been lit (or visited) or not.
 
-As a result, when the queue is empty, the "ring of fire" contains all vertices reachable from the source s, with each vertex reached in the shortest possible way. You can also calculate the lengths of the shortest paths (which just requires maintaining an array of path lengths d[]) as well as save information to restore all of these shortest paths (for this, it is necessary to maintain an array of "parents" p[], which stores for each vertex the vertex from which we reached it).   
+\hspace{7mm}Initially, push the source s to the queue and set used[s] = true, and for all other vertices v set used[v] = false. Then, loop until the queue is empty and in each iteration, pop a vertex from the front of the queue. Iterate through all the edges going out of this vertex and if some of these edges go to vertices that are not already lit, set them on fire and place them in the queue.
+
+\hspace{7mm}As a result, when the queue is empty, the "ring of fire" contains all vertices reachable from the source s, with each vertex reached in the shortest possible way. You can also calculate the lengths of the shortest paths (which just requires maintaining an array of path lengths d[ ] ) as well as save information to restore all of these shortest paths (for this, it is necessary to maintain an array of "parents" p[ ] , which stores for each vertex the vertex from which we reached it).   
 \subsubsection{Example}
 \begin{figure}[h]
     \centering
@@ -221,7 +225,7 @@ We write code for the described algorithm in C++ to traverse the previous given 
 \newpage
 
 \subsection{Task Assignment Problem (Topological Sort -DAG-)}
-Topological sorting of vertices of a Directed Acyclic Graph is an ordering of the vertices $v_1, v_2, ... v_n$ in such a way, that if vertex $u$ comes before vertex $v$ $(u $ → $ v)$ exists in the DAG. 
+\hspace{7mm} Topological sorting of vertices of a Directed Acyclic Graph is an ordering of the vertices $v_1, v_2, ... v_n$ in such a way, that if vertex $u$ comes before vertex $v$ $(u $ → $ v)$ exists in the DAG. 
 exists in the DAG. Every DAG has at least one and possibly more topological sort(s). One application of topological sorting is to find a possible sequence of curriculum that a University student has to take to fulfill graduation requirement. Each curricula has certain pre-requisites to be met. These pre-requisites are never cyclic, so they can be modeled as a DAG. Topological sorting this module pre-requisites DAG gives the student a linear list of curriculum be taken one after another without violating the pre-requisites constraints. In order to have a topological sorting the graph must not contain any cycles. In order to prove it, let's assume there is a cycle made of the vertices $v_1, v_2, v_3 ... v_n$. That means there is a directed edge between $v_i$ and $v_{i+1}$ $(1 \le i \lt< n)$ and between $v_n$ and $v_1$. So now, if we do topological sorting then $v_n$ must come before $v_1$ because of the directed edge from $v_n$ to $v_1$. Clearly, $v_{i+1}$ will come after $v_i$, because of the directed from $v_i$ to $v_{i+1}$, that means $v_1$ must come before $v_n$. Well, clearly we've reached a contradiction, here. So topological sorting can be achieved for only directed and acyclic graphs. Like the following figure \ref{fig:topo-sort}
 \begin{figure}[h]
     \centering
@@ -266,11 +270,13 @@ Motivating problem: Given a \textbf{weighted graph} $G$ and a starting source ve
 
 \hspace{7mm} This problem is called the \textbf{Single-Source Shortest Paths (SSSP)} problem on a \textbf{weighted graph}. It is a classical problem in graph theory and has many real life applications. For example, we can model the city that we live in as a graph. The vertices are the road junctions. The edges are the roads. The time taken to traverse a road is the weight of the edge. You are currently in one road junction. What is the shortest possible time to reach another certain road junction?
 
-\hspace{7mm}There are efficient algorithms to solve this \textbf{SSSP} problem. If the graph is \textbf{unweighted} (or all edges have equal or constant weight), we can use the efficient \textbf{$O(V + E)$} \textbf{BFS} algorithm shown earlier in subsection \ref{subsec:BFS}. For a general weighted graph, BFS does not work correctly and we should use algorithms like the {$O((V + E) log V )$} \textbf{Dijkstra’s} algorithm or the \textbf{$O(V E)$} \textbf{Bellman Ford’s} algorithm. These various algorithms are discussed below.
+\hspace{7mm}There are efficient algorithms to solve this \textbf{SSSP} problem. If the graph is \textbf{unweighted} (or all edges have equal or constant weight), we can use the efficient \textbf{$O(V + E)$} \textbf{BFS} algorithm shown earlier in subsection \ref{subsec:BFS}. For a general weighted graph, BFS does not work correctly and we should use algorithms like the {$O( (V + E) log V )$} \textbf{Dijkstra’s} algorithm or the \textbf{$O(V E)$} \textbf{Bellman Ford’s} algorithm. These various algorithms are discussed below.
 
 \subsection{SSSP on Unweighted Graph}\label{subsec:SSSP on Unweighted Graph}
-Let’s revisit subsection \ref{subsec:BFS}. The fact that BFS visits vertices of a graph layer by layer or level by level from a source vertex (see Figure \ref{fig:BFS-animation}).Inan unweighted graph, the distance between two neighboring vertices connected with an edge is simply one unit (constant value).Therefore, the layer count of a vertex that we have seen in subsection \ref{subsec:BFS} is precisely the shortest path length from the source to that vertex. For example in Figure \ref{fig:BFS-animation} the shortest path from vertex 5 to vertex 7, is 4, as 7 is in the fourth layer in BFS sequence of visitation starting from vertex 5.\\
-\indent Some programming problems require us to reconstruct (restore - print) the actual shortest path, not just the shortest path length. For example, in Figure \ref{fig:BFS-animation}the shortest path from $5$ to $7$ is $5$ → $1$ → $2$ → $3$ → $7$. This can be easily done using vector of integers $vector<int> parent$. Each vertex $v$ remembers its parent $u$ $(p[v] = u)$.  For this example, vertex $7$ remembers $3$ as its parent, vertex $3$ remembers $2$, vertex $2$ remembers $1$, vertex $1$ remembers $5$ (the source). To reconstruct the actual shortest path, we can do a simple recursion from the last vertex $7$ until we hit the source vertex $5$. The modified BFS code (check the comments) is relatively simple:
+\hspace{7mm}Let’s revisit subsection \ref{subsec:BFS}. The fact that BFS visits vertices of a graph layer by layer or level by level from a source vertex (see Figure \ref{fig:BFS-animation}). In an unweighted graph, the distance between two neighboring vertices connected with an edge is simply one unit (constant value). Therefore, the layer count of a vertex that we have seen in subsection \ref{subsec:BFS} is precisely the shortest path length from the source to that vertex. For example in Figure \ref{fig:BFS-animation} the shortest path from vertex 5 to vertex 7, is 4, as 7 is in the fourth layer in BFS sequence of visitation starting from vertex 5.\\
+
+\indent \hspace{7mm}Some programming problems require us to reconstruct (restore - print) the actual shortest path, not just the shortest path length. For example, in Figure \ref{fig:BFS-animation} the shortest path from $5$ to $7$ is $5$ → $1$ → $2$ → $3$ → $7$. This can be easily done using vector of integers $vector<int> parent$. Each vertex $v$ remembers its parent $u$ $(p[v] = u)$.  For this example, vertex $7$ remembers $3$ as its parent, vertex $3$ remembers $2$, vertex $2$ remembers $1$, vertex $1$ remembers $5$ (the source). To reconstruct the actual shortest path, we can do a simple recursion from the last vertex $7$ until we hit the source vertex $5$. The modified BFS code (check the comments) is relatively simple:
+\\
 
 \begin{lstlisting}{c++}
         #define INF (int)INT_MAX
@@ -312,7 +318,7 @@ If the given graph is weighted, BFS does not work. This is because there can be 
 \\
 \hspace{7mm}The shortest path from source vertex 2 to vertex 3 is not via direct edge 2 → 3 with weight 7 that is normally found by BFS, but a ‘detour’ path: 2 → 1 → 3 with smaller total weight 2 + 3 = 5.
 
-\hspace{7mm}To solve the SSSP problem on weighted graph, we use a greedy Edsger Wybe $Dijkstra’s$ algorithm. There are several ways to implement this classic algorithm. Here we adopt one of the easiest implementation variant that uses built-in C++ STL \lstinline|priority_queue| (or Java \lstinline|PriorityQueue|). This is to keep the length of code minimal—a necessary feature in complexty and programming.
+\hspace{7mm}To solve the SSSP problem on weighted graph, we use a greedy Edsger Wybe $Dijkstra’s$ algorithm. There are several ways to implement this classic algorithm. Here we adopt one of the easiest implementation variant that uses built-in C$++$ STL \lstinline|priority_queue| (or Java \lstinline|PriorityQueue|). This is to keep the length of code minimal—a necessary feature in complexty and programming.
 
 \hspace{7mm}This $Dijkstra’s$ variant maintains a priority queue called $pq$ that stores pairs of vertex
 information. The first and the second item of the pair is the distance of the vertex from the
